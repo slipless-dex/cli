@@ -1,0 +1,31 @@
+{
+  "name": "@slipless/cli",
+  "version": "0.1.0",
+  "description": "Devops CLI for Slipless: deploy, verify, scaffold tokenlists, dump positions.",
+  "license": "MIT",
+  "author": "Slipless Labs",
+  "repository": { "type": "git", "url": "git+https://github.com/slipless-dex/cli.git" },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": { "slipless": "./dist/cli.js" },
+  "files": ["dist", "README.md", "LICENSE"],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@slipless/abi": "^0.4.0",
+    "@slipless/deployments": "^0.4.0",
+    "@slipless/token-lists": "^0.1.0",
+    "viem": "^2.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.2"
+  }
+}
