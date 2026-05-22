@@ -2,14 +2,7 @@ import { createPublicClient, http, type Address } from "viem";
 import { PERP_ENGINE_ABI } from "@slipless/abi";
 import { deploymentForChainId } from "@slipless/deployments";
 
-/**
- * `slipless positions dump <account> --chain <id> --rpc <url>`
- *
- * Reads PerpEngine.markets and PerpEngine.positions for every market the
- * caller specifies via --markets (comma-separated bytes32 ids), or
- * defaults to a hardcoded discovery list if --markets is omitted. We don't
- * have on-chain market enumeration; downstream tooling should feed it.
- */
+// PerpEngine has no on-chain market enumeration; caller passes --markets <id1,id2,…>.
 export async function runPositions(args: string[]): Promise<number> {
   const [verb, account, ...rest] = args;
   if (verb !== "dump" || !account) {

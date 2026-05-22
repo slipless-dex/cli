@@ -1,14 +1,4 @@
 #!/usr/bin/env node
-/**
- * Slipless devops CLI. Subcommand-router with no third-party dependency
- * — keeps the binary small and the install fast.
- *
- *   slipless tokenlist validate <path|url>
- *   slipless tokenlist diff <prev> <next>
- *   slipless deployments show <chain>
- *   slipless positions dump <account> --rpc <url> --chain <id>
- */
-
 import { existsSync, readFileSync } from "node:fs";
 
 import { runTokenlist } from "./commands/tokenlist.js";
@@ -54,15 +44,14 @@ Subcommands:
 }
 
 function printVersion(): void {
-  // Read our own package.json — works in dev (.ts) and prod (.js) builds.
   const pkgPath = new URL("../package.json", import.meta.url);
   const file = pkgPath.protocol === "file:" ? pkgPath.pathname.replace(/^\/([A-Z]:)/, "$1") : "";
   if (file && existsSync(file)) {
     const pkg = JSON.parse(readFileSync(file, "utf8")) as { version: string };
     console.log(`slipless ${pkg.version}`);
-  } else {
-    console.log("slipless");
+    return;
   }
+  console.log("slipless");
 }
 
 main(process.argv).then((code) => process.exit(code), (err) => {
